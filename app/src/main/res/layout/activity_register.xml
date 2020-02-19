@@ -37,6 +37,7 @@
                 />
 
             <ImageView
+                android:onClick="handleChangeAvatar"
                 android:id="@+id/imageView"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -176,6 +177,7 @@
     </ScrollView>
 
     <Button
+        android:onClick="handleSubmit"
         android:id="@+id/button_ok"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
