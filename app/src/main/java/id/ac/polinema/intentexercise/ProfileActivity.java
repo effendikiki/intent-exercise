@@ -8,38 +8,43 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import id.ac.polinema.intentexercise.model.*;
 
 import static id.ac.polinema.intentexercise.RegisterActivity.*;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private TextView fullnameText,emailText, passwordText, cfrmpasswordText, homepageText, aboutyouText;
-    private ImageView image_profile;
+    private TextView fullnameText,emailText,  homepageText, aboutyouText;
+//    private ImageView image_profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        image_profile = findViewById(R.id.image_profile);
+//        image_profile = findViewById(R.id.image_profile);
         fullnameText = findViewById(R.id.label_fullname);
         emailText = findViewById(R.id.label_email);
         homepageText = findViewById(R.id.label_homepage);
         aboutyouText = findViewById(R.id.label_about);
 
         Bundle extras= getIntent().getExtras();
+        user_data user = extras.getParcelable(key);
+
 
         if (extras != null){
-            fullnameText.setText(getIntent().getStringExtra(FULLNAME_KEY));
-            emailText.setText(getIntent().getStringExtra(EMAIL_KEY));
-            homepageText.setText(getIntent().getStringExtra(HOMEPAGE_KEY));
-            aboutyouText.setText(getIntent().getStringExtra(ABOUTYOU_KEY));
+            fullnameText.setText(user.getInputFullname());
+            emailText.setText(user.getInputEmail());
+            homepageText.setText(user.getInputHomepage());
+            aboutyouText.setText(user.getInputAboutyou());
         }
 
     }
 
     public void visitHomepage(View view) {
-        Intent implicit = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.github.com/effendikiki"));
+        Bundle extras= getIntent().getExtras();
+        user_data user = extras.getParcelable(key);
+        Intent implicit = new Intent(Intent.ACTION_VIEW, Uri.parse("http://" + user.getInputHomepage()));
         startActivity(implicit);
     }
 }

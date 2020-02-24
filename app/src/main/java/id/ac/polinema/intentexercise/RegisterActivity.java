@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+import id.ac.polinema.intentexercise.model.*;
 
 import java.io.IOException;
 
@@ -25,13 +26,8 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView inputImage;
     private EditText inputFullname, inputEmail, inputPassword, inputCfrmPassword, inputHomepage, inputAboutyou;
 
-    public static final String FULLNAME_KEY="fullname";
-    public static final String  EMAIL_KEY="email";
-    public static final String PASSWORD_KEY="password";
-    public static final String  CFRMPASSWORD_KEY="cfrmpassword";
-    public static final String HOMEPAGE_KEY="homepage";
-    public static final String ABOUTYOU_KEY="aboutyou";
-    public static final String IMAGE_KEY="image";
+    public static final String key="key";
+
 
 
     @Override
@@ -56,20 +52,18 @@ public class RegisterActivity extends AppCompatActivity {
         String output_CfrmPassword = inputCfrmPassword.getText().toString();
         String output_Homepage = inputHomepage.getText().toString();
         String output_Aboutyou = inputAboutyou.getText().toString();
-//        Uri output_uri = inputImage.getIma
 
-        Intent intent = new Intent(this, ProfileActivity.class);
+
+
 
 
         if (!(output_Fullname).equals("") && !(output_Email).equals("") && !(output_Password).equals("") && !(output_CfrmPassword).equals("") && !(output_Homepage).equals("") && !(output_Aboutyou).equals("")){
 
             if ((output_Password).equals(output_CfrmPassword) ){
-                intent.putExtra(FULLNAME_KEY, output_Fullname);
-                intent.putExtra(EMAIL_KEY, output_Email);
-                intent.putExtra(PASSWORD_KEY, output_Password);
-                intent.putExtra(CFRMPASSWORD_KEY, output_CfrmPassword);
-                intent.putExtra(HOMEPAGE_KEY, output_Homepage);
-                intent.putExtra(ABOUTYOU_KEY, output_Aboutyou);
+                Intent intent = new Intent(this, ProfileActivity.class);
+
+                user_data user = new user_data(output_Fullname, output_Email, output_Password, output_CfrmPassword, output_Homepage, output_Aboutyou);
+                intent.putExtra(key, user);
 
                 startActivity(intent);
             }
